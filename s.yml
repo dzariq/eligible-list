@@ -1,0 +1,21 @@
+edition: 1.0.0          #  The version of the YAML syntax. The version complies with the semantic versioning specification.
+name: eligible-list       #  The name of the project.
+access: "default"  #  The alias of the key.
+
+services:
+  fc-deploy-test: #  The name of the service.
+    component: fc  # The name of the component.
+    props: # The property value of the component.
+      region: ap-southeast-3
+      service:
+        name: test
+        description: 'test'
+        internetAccess: true
+      function:
+        name: func-jaf7ifca
+        description: this is a test
+        runtime: php7.4
+        codeUri: ./
+        handler: index.handler
+        memorySize: 128
+        timeout: 6
