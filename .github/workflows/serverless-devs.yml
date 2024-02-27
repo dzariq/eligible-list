@@ -6,27 +6,31 @@ on:
       - main
 
 jobs:
-  deploy:
+  serverless-devs-cd:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      
+
     - name: Set up PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '7.2'
+        php-version: '7.4'
 
     - name: Install PHP dependencies
       run: composer install --no-dev --optimize-autoloader
 
-    - name: Deploy to Alibaba Cloud Function Compute
-      uses: htynkn/aliyun-serverless-action@master
-      env:
-        ACCOUNT_ID: ${{ secrets.ALIYUN_ACCOUNT_ID }}
-        REGION: ap-southeast-3
-        ACCESS_KEY_ID: ${{ secrets.ALIYUN_ACCESS_KEY_ID }}
-        ACCESS_KEY_SECRET: ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }}
+    - uses: actions/setup-node@v2
       with:
-        functionFolder: /services/test/functions/func-jaf7ifca
+        node-version: 15
+        registry-url: https://registry.npmjs.org/
+    - run: npm install
+    - run: npm install -g @serverless-devs/s
+      # The default key configuration command is an Alibaba Cloud key configuration command. For more information, see the following topics:
+      # Use GitHub Actions and Serverless Devs to implement CI/CD: http://short.devsapp.cn/cicd/github/action/usage
+      # The official website of Serverless Devs is deployed by using Serverless Devs: http://short.devsapp.cn/cicd/github/action/practice
+    - run: s config add --AccountID ${{secrets.ALIYUN_ACCOUNT_ID}} --AccessKeyID ${{secrets.ALIYUN_ACCESS_KEY_ID}} --AccessKeySecret ${{secrets.ALIYUN_ACCESS_KEY_SECRET}} -a default
+    # - run: s build
+    # - run: rm -rf ./eligible-list
+    - run: s deploy   
