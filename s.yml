@@ -12,7 +12,7 @@ services:
         description: 'test'
         internetAccess: true
       function:
-        name: func-jaf7ifca
+        name: func-jaf7ifcai
         description: this is a test
         runtime: php7.4
         codeUri: ./
