@@ -20,7 +20,8 @@ jobs:
 
     - name: Install PHP dependencies
       run: composer install --no-dev --optimize-autoloader
-      run: php -d phar.readonly=0 /path/to/box.phar build
+      
+    - run: php -d phar.readonly=0 /path/to/box.phar build
 
 
     - uses: actions/setup-node@v2
