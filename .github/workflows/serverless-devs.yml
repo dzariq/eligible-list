@@ -13,20 +13,20 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       
+    - name: Install PHP dependencies
+      run: composer install --no-dev --optimize-autoloader
+      
     - name: Set up PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: '7.4'
 
-    - name: Install PHP dependencies
-      run: composer install --no-dev --optimize-autoloader
-
     - name: Deploy to Alibaba Cloud Function Compute
-      uses: htynkn/aliyun-serverless-action@master
-      env:
-        ACCOUNT_ID: ${{ secrets.ALIYUN_ACCOUNT_ID }}
-        REGION: ap-southeast-3
-        ACCESS_KEY_ID: ${{ secrets.ALIYUN_ACCESS_KEY_ID }}
-        ACCESS_KEY_SECRET: ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }}
+      uses: aliyun/serverless-deploy-action@v1
       with:
-        functionFolder: func-jaf7ifca
+        region: 'ap-southeast-3'
+        accessKeyId: ${{ secrets.ALIYUN_ACCESS_KEY_ID }}
+        accessKeySecret: ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }}
+        serviceName: 'test'
+        functionName: 'func-jaf7ifca'
+        artifact: .
