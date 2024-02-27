@@ -28,3 +28,5 @@ jobs:
         REGION: ap-southeast-3
         ACCESS_KEY_ID: ${{ secrets.ALIYUN_ACCESS_KEY_ID }}
         ACCESS_KEY_SECRET: ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }}
+      with:
+        functionFolder: services/test/functions/func-jaf7ifca
