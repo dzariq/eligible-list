@@ -16,7 +16,7 @@ jobs:
     - name: Set up PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '7.2' # Set the PHP version here
+        php-version: '7.2' 
 
     - name: Install PHP dependencies
       run: composer install --no-dev --optimize-autoloader
