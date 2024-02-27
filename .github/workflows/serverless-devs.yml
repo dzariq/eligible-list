@@ -16,7 +16,7 @@ jobs:
     - name: Set up PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '7.4'
+        php-version: '7.2'
 
     - name: Install PHP dependencies
       run: composer install --no-dev --optimize-autoloader
@@ -32,5 +32,5 @@ jobs:
       # The official website of Serverless Devs is deployed by using Serverless Devs: http://short.devsapp.cn/cicd/github/action/practice
     - run: s config add --AccountID ${{secrets.ALIYUN_ACCOUNT_ID}} --AccessKeyID ${{secrets.ALIYUN_ACCESS_KEY_ID}} --AccessKeySecret ${{secrets.ALIYUN_ACCESS_KEY_SECRET}} -a default
     - run: s build
-    # - run: rm -rf ./eligible-list
+    - run: rm -rf ./abc
     - run: s deploy   
