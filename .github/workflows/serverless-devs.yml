@@ -19,9 +19,9 @@ jobs:
     - name: Deploy to Alibaba Cloud Function Compute
       uses: aliyun/serverless-deploy-action@v1
       with:
-        region: <region>
-        accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
-        accessKeySecret: ${{ secrets.ACCESS_KEY_SECRET }}
-        serviceName: <service_name>
-        functionName: <function_name>
+        region: ap-southeast-3
+        accessKeyId: ${{ secrets.ALIYUN_ACCESS_KEY_ID }}
+        accessKeySecret: ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }}
+        serviceName: test
+        functionName: func-jaf7ifca
         artifact: .
