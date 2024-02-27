@@ -7,7 +7,6 @@ use AliyunMNS\Exception\MnsException;
 
 class MNS
 {
-
     public function publish($topicName,$data = array(),$logger)
     {
         $client = new Client(getenv('MNS_ENDPOINT'), getenv('ACCESS_KEY_ID'),getenv('ACCESS_KEY_SECRET'));
