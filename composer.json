@@ -1,0 +1,9 @@
+{
+    "require": {
+        "alibabacloud/client": "^1.5",
+        "phpoffice/phpexcel": "^1.8",
+        "phpmailer/phpmailer": "^6.9",
+        "alibabacloud/sdk": "^1.8",
+        "aliyun/aliyun-mns-php-sdk": "^1.1"
+    }
+}
