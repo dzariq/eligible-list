@@ -1,21 +1,27 @@
-name: Serverless Devs Project CI/CD
+name: CI/CD
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - main
 
 jobs:
-  serverless-devs-cd:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 12
-          registry-url: https://registry.npmjs.org/
-      - run: npm install
-      - run: npm install -g @serverless-devs/s
-      # 默认密钥配置指令是阿里云密钥配置指令，更多可以参考：
-      # 如何通过Github Action使用Serverless Devs做CI/CD：https://github.com/Serverless-Devs/website/blob/master/blog/zh-cn/serverless-devs-ci-cd-github-action-usage.md
-      - run: s config add --AccountID ${{secrets.AccountID}} --AccessKeyID ${{secrets.AccessKeyID}} --AccessKeySecret ${{secrets.AccessKeySecret}} -a default
-      - run: s deploy
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Install PHP dependencies
+      run: composer install --no-dev --optimize-autoloader
+
+    - name: Deploy to Alibaba Cloud Function Compute
+      uses: aliyun/serverless-deploy-action@v1
+      with:
+        region: <region>
+        accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
+        accessKeySecret: ${{ secrets.ACCESS_KEY_SECRET }}
+        serviceName: <service_name>
+        functionName: <function_name>
+        artifact: .
