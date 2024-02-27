@@ -3,7 +3,7 @@ name: eligible-list       #  The name of the project.
 access: "default"  #  The alias of the key.
 
 services:
-  fc-deploy-test: #  The name of the service.
+  fc-update-test: #  The name of the service.
     component: fc  # The name of the component.
     props: # The property value of the component.
       region: ap-southeast-3
@@ -17,5 +17,5 @@ services:
         runtime: php7.2
         codeUri: ./
         handler: index.handler
-        memorySize: 128
+        memorySize: 256
         timeout: 6

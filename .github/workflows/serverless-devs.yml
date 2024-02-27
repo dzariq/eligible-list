@@ -33,4 +33,4 @@ jobs:
     - run: s config add --AccountID ${{secrets.ALIYUN_ACCOUNT_ID}} --AccessKeyID ${{secrets.ALIYUN_ACCESS_KEY_ID}} --AccessKeySecret ${{secrets.ALIYUN_ACCESS_KEY_SECRET}} -a default
     # - run: s build
     # - run: rm -rf ./eligible-list
-    - run: s deploy   
+    - run: s deploy --use-local
