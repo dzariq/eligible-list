@@ -23,7 +23,14 @@ jobs:
 
     - name: Deploy to Alibaba Cloud Function Compute
       run: |
-        wget -O install.sh https://raw.githubusercontent.com/aliyun/aliyun-cli/master/scripts/install.sh
-        sh install.sh
+        # Download the Alibaba Cloud CLI binary
+        wget https://github.com/aliyun/aliyun-cli/releases/download/v3.0.67/aliyun-cli-linux-amd64.tar.gz
+        tar -zxvf aliyun-cli-linux-amd64.tar.gz
+        
+        # Move the binary to a directory in the PATH
+        sudo mv aliyun /usr/local/bin/aliyun
+
+        # Clean up
+        rm aliyun-cli-linux-amd64.tar.gz
         aliyun configure set --profile default --access-key-id ${{ secrets.ALIYUN_ACCESS_KEY_ID }} --access-key-secret ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }} --region ap-southeast-3
         aliyun fc deploy --region ap-southeast-3 --service test --function func-jaf7ifca --zip-file .
