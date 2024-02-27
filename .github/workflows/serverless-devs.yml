@@ -12,7 +12,14 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      
+
+    - name: Install Alibaba Cloud CLI
+      uses: actions/download-artifact@v2
+      with:
+        name: aliyun-cli
+        path: /usr/local/bin
+        repo: dzariq/eligible-list # Replace with your actual repo and artifact repo
+
     - name: Set up PHP
       uses: shivammathur/setup-php@v2
       with:
@@ -23,14 +30,5 @@ jobs:
 
     - name: Deploy to Alibaba Cloud Function Compute
       run: |
-        # Download the Alibaba Cloud CLI binary
-        wget https://github.com/aliyun/aliyun-cli/releases/download/v3.0.67/aliyun-cli-linux-amd64.tar.gz
-        tar -zxvf aliyun-cli-linux-amd64.tar.gz
-        
-        # Move the binary to a directory in the PATH
-        sudo mv aliyun /usr/local/bin/aliyun
-
-        # Clean up
-        rm aliyun-cli-linux-amd64.tar.gz
         aliyun configure set --profile default --access-key-id ${{ secrets.ALIYUN_ACCESS_KEY_ID }} --access-key-secret ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }} --region ap-southeast-3
         aliyun fc deploy --region ap-southeast-3 --service test --function func-jaf7ifca --zip-file .
