@@ -13,13 +13,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       
-    - name: Install PHP dependencies
-      run: composer install --no-dev --optimize-autoloader
-
     - name: Set up PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: '7.4'
+
+    - name: Install PHP dependencies
+      run: composer install --no-dev --optimize-autoloader
 
     - name: Deploy to Alibaba Cloud Function Compute
       run: |
