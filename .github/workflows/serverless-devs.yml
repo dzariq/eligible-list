@@ -17,7 +17,7 @@ jobs:
       run: composer install --no-dev --optimize-autoloader
 
     - name: Deploy to Alibaba Cloud Function Compute
-      uses: alibabacloud/serverless-deploy-action
+      uses: aliyun/serverless-aliyun-function-compute
       with:
         region: ap-southeast-3
         accessKeyId: ${{ secrets.ALIYUN_ACCESS_KEY_ID }}
