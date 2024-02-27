@@ -13,13 +13,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install Alibaba Cloud CLI
-      uses: actions/download-artifact@v2
-      with:
-        name: aliyun-cli
-        path: /usr/local/bin
-        repo: dzariq/eligible-list # Replace with your actual repo and artifact repo
-
     - name: Set up PHP
       uses: shivammathur/setup-php@v2
       with:
