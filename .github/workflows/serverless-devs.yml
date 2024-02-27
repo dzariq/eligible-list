@@ -23,6 +23,7 @@ jobs:
 
     - name: Deploy to Alibaba Cloud Function Compute
       run: |
-        curl https://raw.githubusercontent.com/aliyun/aliyun-cli/master/scripts/install.sh | sh
+        wget -O install.sh https://raw.githubusercontent.com/aliyun/aliyun-cli/master/scripts/install.sh
+        sh install.sh
         aliyun configure set --profile default --access-key-id ${{ secrets.ALIYUN_ACCESS_KEY_ID }} --access-key-secret ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }} --region ap-southeast-3
         aliyun fc deploy --region ap-southeast-3 --service test --function func-jaf7ifca --zip-file .
