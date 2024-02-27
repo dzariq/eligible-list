@@ -1,0 +1,16 @@
+service: test
+
+provider:
+  name: alibaba
+  runtime: custom
+  customName: php7.4
+  memorySize: 128
+  timeout: 10
+
+functions:
+  hello:
+    handler: index.handler
+    events:
+      - http:
+          path: /
+          method: GET
