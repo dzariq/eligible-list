@@ -15,18 +15,13 @@ jobs:
       
     - name: Install PHP dependencies
       run: composer install --no-dev --optimize-autoloader
-      
+
     - name: Set up PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: '7.4'
 
     - name: Deploy to Alibaba Cloud Function Compute
-      uses: aliyun/serverless-deploy-action@v1
-      with:
-        region: 'ap-southeast-3'
-        accessKeyId: ${{ secrets.ALIYUN_ACCESS_KEY_ID }}
-        accessKeySecret: ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }}
-        serviceName: 'test'
-        functionName: 'func-jaf7ifca'
-        artifact: .
+      run: |
+        aliyun configure set --profile default --access-key-id ${{ secrets.ALIYUN_ACCESS_KEY_ID }} --access-key-secret ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }} --region ap-southeast-3
+        aliyun fc deploy --region ap-southeast-3 --service test --function func-jaf7ifca --zip-file .
