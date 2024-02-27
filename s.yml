@@ -14,8 +14,8 @@ services:
       function:
         name: func-jaf7ifca
         description: this is a test
-        runtime: php7.4
-        codeUri: ./popo
+        runtime: php7.2
+        codeUri: ./
         handler: index.handler
         memorySize: 128
         timeout: 6
